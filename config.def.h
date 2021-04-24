@@ -1,5 +1,8 @@
 /* sEe LICENSE file for copyright and license details. */
 
+/* For media keys */
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx  = 5;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -19,6 +22,11 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_gray4, col_pink_red,  col_pink_red  },
 };
 
+/* Volume control using amixer */
+static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
+static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
+static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+
 /* tagging */
 static const char *tags[] = { "", "", "", "", "", "ﳑ", "", "", "", };
 
@@ -27,11 +35,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class              instance  title  tags mask     isfloating   monitor */
-	{ "Gimp",             NULL,     NULL,  0,            1,           -1 },
-	{ "Firefox",          NULL,     NULL,  1 << 2,       0,           -1 },
-	{ "Slack",            NULL,     NULL,  1 << 3,       0,           -1 },
-	{ "Microsoft Teams",  NULL,     NULL,  1 << 4,       0,           -1 },
+	/* class                instance title  tags mask isfloating monitor */
+	{ "Gimp",               NULL,    NULL,  0,        1,         -1 },
+	{ "Firefox",            NULL,    NULL,  1 << 2,   0,         -1 },
+	{ "firefox",            NULL,    NULL,  1 << 2,   0,         -1 },
+	{ "Slack",              NULL,    NULL,  1 << 3,   0,         -1 },
+	{ "Microsoft Teams",    NULL,    NULL,  1 << 4,   0,         -1 },
+	{ "jetbrains-goland",   NULL,    NULL,  1 << 5,   0,         -1 },
+	{ "jetbrains-pycharm",  NULL,    NULL,  1 << 6,   0,         -1 },
+	{ "jetbrains-webstorm", NULL,    NULL,  1 << 7,   0,         -1 },
+	{ "jetbrains-clion",    NULL,    NULL,  1 << 8,   0,         -1 },
 };
 
 /* layout(s) */
@@ -80,7 +93,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	//{ MODKEY,                       XK_space,  setlayout,      {0} },
+	{ MODKEY,                       XK_z,  setlayout,      {0} },
 	{ MODKEY,                       XK_space,  spawn,          {.v = togglelang} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -99,6 +112,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+   /* Volume control */
+   { 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+   { 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
+   { 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
 };
 
 /* button definitions */
