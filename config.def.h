@@ -4,7 +4,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -23,9 +23,11 @@ static const char *colors[][3]      = {
 };
 
 /* Volume control using amixer */
-static const char *upvol[]   = { "/usr/bin/pactl", "set-sink-volume", "0", "+5%",     NULL };
-static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%",     NULL };
-static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
+static const char *upvol[]   = { "/home/vtimofei/scripts/volup",     NULL };
+static const char *downvol[] = { "/home/vtimofei/scripts/voldown",     NULL };
+static const char *mutevol[] = { "/home/vtimofei/scripts/mutetog",  NULL };
+static const char *screenshot[] = { "gnome-screenshot",  NULL };
+static const char *lock_screen[] = { "xscreensaver-command", "-lock",  NULL };
 
 /* tagging */
 static const char *tags[] = { "", "", "", "", "", "ﳑ", "", "", "", };
@@ -102,6 +104,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+  { 0,                            XK_Print,  spawn,          {.v = screenshot } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -112,6 +115,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_l,    spawn,          {.v = lock_screen } },
    /* Volume control */
    { 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
    { 0,                       XF86XK_AudioMute, spawn, {.v = mutevol } },
