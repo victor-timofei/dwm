@@ -13,7 +13,7 @@ static const unsigned int gappov      = 10;       /* vert outer gap between wind
 static const int smartgaps            = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar              = 1;        /* 0 means no bar */
 static const int topbar               = 1;        /* 0 means bottom bar */
-static const int vertpad              = 5;       /* vertical padding of bar */
+static const int vertpad              = 10;       /* vertical padding of bar */
 static const int sidepad              = 10;       /* horizontal padding of bar */
 static const int horizontal_magin     = 20;       /* horizontal margin of bar */
 static const char *fonts[]            = { "GoMono Nerd Font:size=10" };
@@ -32,7 +32,7 @@ static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]        = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_pink_red,  col_gray2  },
+	[SchemeSel]  = { col_gray4, col_gray1,  col_gray2  },
 };
 
 static const unsigned int alphas[][3]      = {
