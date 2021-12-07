@@ -24,15 +24,16 @@ static const char col_gray1[]         = "#222222";
 static const char col_gray2[]         = "#444444";
 static const char col_gray3[]         = "#bbbbbb";
 static const char col_gray4[]         = "#eeeeee";
+static const char col_black[]         = "#000000";
 static const char col_cyan[]          = "#005577";
 static const char col_pink_red[]      = "#99000f";
-static const unsigned int baralpha    = 0xb0;
+static const unsigned int baralpha    = 0x0b;
 static const unsigned int borderalpha = OPAQUE;
 
 static const char *colors[][3]        = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_gray1,  col_gray2  },
+	[SchemeNorm] = { col_gray3, col_black, col_gray2 },
+	[SchemeSel]  = { col_gray4, col_black,  col_gray2  },
 };
 
 static const unsigned int alphas[][3]      = {
@@ -45,7 +46,7 @@ static const unsigned int alphas[][3]      = {
 static const char *upvol[]       = { "/home/vtimofei/scripts/volup",   NULL };
 static const char *downvol[]     = { "/home/vtimofei/scripts/voldown", NULL };
 static const char *mutevol[]     = { "/home/vtimofei/scripts/mutetog", NULL };
-static const char *lock_screen[] = { "xscreensaver-command", "-lock",  NULL };
+static const char *lock_screen[] = { "slock",  NULL };
 
 /* tagging */
 static const char *tags[] = { "", "", "", "", "", "ﳑ", "", "", "", };
@@ -97,7 +98,7 @@ static const char *dmenucmd[] = { "dmenu_run",
 	"-l", dmenulines,
 	"-m", dmenumon,
 	"-fn", dmenufont,
-	"-nb", col_gray1,
+	"-nb", col_black,
 	"-nf", col_gray3,
 	"-sb", col_cyan,
 	"-sf", col_gray4,
